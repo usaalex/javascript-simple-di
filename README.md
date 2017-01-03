@@ -1,10 +1,12 @@
 # JavaScript Simple Dependency Injection
 
+Simple and straightforward Dependency Injection.
+
 ## How to
 
 ```
 Injector.getInstance()
-        // register module/service/variable
+        // register module/service/primitives
         .register('<Module name>', <Injectable>, ['<List>', '<of>', '<dependencies>'])
         // resolve
         .resolve();
