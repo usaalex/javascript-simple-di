@@ -27,7 +27,6 @@ Injector.global() // or new Injector('[scope name]') if separate scope is requir
 ## Examples
 
 ```
-
 const settings = {
     version: '1.0.2',
     name: 'some-app'
@@ -83,4 +82,22 @@ Injector.global().register('settings', settings)
 new Injector('WithError').register('s0', Service0)
                          .register('s1', Service1, ['s0', 's1'])
                          .resolveAll(); // will not be resolved due to circular dependency error
+
+// angular run equivalent
+new Injector('Functions!').register('func', function(str){ console.log(str); })
+                          .register('world', 'hello world')
+                          .resolveAll(); // hello world
+
+// registering functions the right way
+// angular factory equivalent
+function func(world) { // inject "world"
+    return function hello() {
+        console.log(world, arguments);
+    }
+}
+
+let factory = new Injector('factory');
+factory.register('func', func, ['world']).register('world', 'Injected string!').resolveAll();
+let helloWorld = factory.get<any>('func'); // get registered module
+helloWorld(1, 2, 3); // Injected string! 1 2 3
 ```
