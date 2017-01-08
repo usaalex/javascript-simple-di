@@ -18,6 +18,12 @@ Injector.global() // or new Injector('[scope name]') if separate scope is requir
         .resolveAll(); // or .resolve('<Module name>')
 ```
 
+## Notes
+* Passing a class as Injectable will instantiate it once per scope (making it a singleton).
+* Only classes or functions can have dependencies.
+* Dependencies are injected through a constructor or function parameters in the same order as they are registered (angular-way).
+* Different scopes will have different instances of modules.
+
 ## Examples
 
 ```
